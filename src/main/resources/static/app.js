@@ -1,17 +1,17 @@
 var stompClient = null
 
 function setConnected(connected) {
-    $("#connect").prop("disabled", connected)
-    $("#disconnect").prop("disabled", !connected)
+    $('#connect').prop('disabled', connected)
+    $('#disconnect').prop('disabled', !connected)
     if (connected) {
-        $("#systemInfo").show()
-        $("#mymessage").prop("disabled", !connected)
+        $('#systemInfo').show()
+        $('#mymessage').prop('disabled', !connected)
     }
     else {
-        $("#systemInfo").hide()
-        $("#mymessage").prop("disabled", true)
+        $('#systemInfo').hide()
+        $('#mymessage').prop('disabled', true)
     }
-    $("#systemInfo").html("")
+    $('#systemInfo').html('')
 }
 
 function connect() {
@@ -33,27 +33,27 @@ function disconnect() {
         stompClient.disconnect()
     }
     setConnected(false);
-    console.log("Disconnected")
+    console.log('Disconnected')
 }
 
 function sendMessage() {
-    let mymessage = $("#mymessage").val()
-    //stompClient.send("/states", {}, JSON.stringify({'name': mymessage}))
-    stompClient.send("/states", {}, mymessage)
+    let mymessage = $('#mymessage').val()
+    //stompClient.send('/states', {}, JSON.stringify({'name': mymessage}))
+    stompClient.send('/states', {}, mymessage)
 }
 
 function showMesage(message) {
-    $("#systemInfo").prepend("<tr><td>" + message + "</td></tr>")
+    $('#systemInfo').prepend('<tr><td>' + message + '</td></tr>')
 }
 
 $(function () {
-    $("form").on('submit', function (e) {
+    $('form').on('submit', function (e) {
         e.preventDefault()
     })
-    $("#connect").click(function() { connect() })
-    $("#disconnect").click(function() { disconnect() })
-    $("#send").click(function() { 
+    $('#connect').click(function() { connect() })
+    $('#disconnect').click(function() { disconnect() })
+    $('#send').click(function() { 
         sendMessage()
-        $("#mymessage").val('')
+        $('#mymessage').val('')
     })
 });
